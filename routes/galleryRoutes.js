@@ -53,8 +53,9 @@ import { protect, authorizeRoles } from '../middleware/authMiddleware.js';
 const router = express.Router(); // Only ONE declaration here! ✅
 
 // PUBLIC/READ-ONLY
-router.get('/', getGallery);
-router.get('/category/:category', getByCategory);
+router.get('/',protect, getGallery);
+router.get('/category/:category',protect,
+  getByCategory);
 
 // PROTECTED (Editor & Admin)
 router.post('/', protect, createGallery);
