@@ -69,19 +69,38 @@ export const deleteImage=async(req,res)=>{
 }
 
 // rearrange images
-export const rearrangeImages=async(req,res)=>{
-    try{
-        const {images}=req.body;
-        const updated=await Gallery.findByIdAndUpdate(
+// export const rearrangeImages=async(req,res)=>{
+//     try{
+//         const {images}=req.body;
+//         const updated=await Gallery.findByIdAndUpdate(
+//             req.params.id,
+//             {
+//                 images,
+//             },
+//             {new:true}
+//         );
+//         re.json(updated);
+//     }catch(err){
+//         res.status(500).json({error:err.message});
+//     }
+// }
+
+// rearrange images
+export const rearrangeImages = async (req, res) => {
+    try {
+        const { images } = req.body;
+        
+        const updated = await Gallery.findByIdAndUpdate(
             req.params.id,
             {
-                images,
+                $set: { images }, // Explicitly sets the new ordered array
             },
-            {new:true}
+            { new: true }
         );
-        re.json(updated);
-    }catch(err){
-        res.status(500).json({error:err.message});
+        
+        res.json(updated); // Fixed typo from 're' to 'res'
+    } catch (err) {
+        res.status(500).json({ error: err.message });
     }
 }
 
