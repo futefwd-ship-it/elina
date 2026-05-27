@@ -68,6 +68,24 @@ export const deleteImage=async(req,res)=>{
     }
 }
 
+// rearrange images
+export const rearrangeImages=async(req,res)=>{
+    try{
+        const {images}=req.body;
+        const updated=await Gallery.findByIdAndUpdate(
+            req.params.id,
+            {
+                images,
+            },
+            {new:true}
+        );
+        re.json(updated);
+    }catch(err){
+        res.status(500).json({error:err.message});
+    }
+}
+
+
 // DELETE CATEGORY
 export const deleteGallery = async (req, res) => {
   try {

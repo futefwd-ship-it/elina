@@ -44,7 +44,8 @@ import {
   getByCategory, 
   addImage, 
   deleteImage, 
-  deleteGallery 
+  deleteGallery,
+  rearrangeImages 
 } from '../controllers/galleryControllers.js';
 
 // Import secure auth middleware layers
@@ -61,6 +62,7 @@ router.get('/category/:category',protect,
 router.post('/', protect, createGallery);
 router.put('/:id/add-image', protect, addImage);
 
+router.put("/rearrange/:id", rearrangeImages);
 // RESTRICTED CRITICAL DELETIONS (Admin Only)
 router.put('/:id/delete-image', protect, authorizeRoles('Admin'), deleteImage);
 router.delete('/:id', protect, authorizeRoles('Admin'), deleteGallery);
