@@ -4,7 +4,7 @@ import User from '../models/User.js';
 
 // ENVIRONMENT VARIABLES
 const JWT_SECRET = process.env.JWT_SECRET || 'your_ultra_secure_secret_key_2026';
-const JWT_EXPIRES_IN = process.env.JWT_EXPIRES_IN || '8h';
+// const JWT_EXPIRES_IN = process.env.JWT_EXPIRES_IN || '8h';
 
 export const register = async (req, res) => {
   try {
@@ -30,7 +30,7 @@ export const register = async (req, res) => {
     const token = jwt.sign(
       { id: user._id, role: user.role }, 
       JWT_SECRET, 
-    //   { expiresIn: JWT_EXPIRES_IN }
+      // { expiresIn: JWT_EXPIRES_IN }
     );
 
     res.status(201).json({
@@ -70,7 +70,7 @@ export const login = async (req, res) => {
     const token = jwt.sign(
       { id: user._id, role: user.role }, 
       JWT_SECRET, 
-    //   { expiresIn: JWT_EXPIRES_IN }
+      // { expiresIn: JWT_EXPIRES_IN }
     );
 
     res.json({ 
