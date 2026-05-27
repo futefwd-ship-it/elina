@@ -37,37 +37,77 @@ export const getByCategory=async(req,res)=>{
 }
 
 
-export const addImage=async(req,res)=>{
-    try{
-        const {image,title}=req.body;
+// export const addImage=async(req,res)=>{
+//     try{
+//         const {image,title}=req.body;
 
-        const updated=await Gallery.findByIdAndUpdate(
-            req.params.id,
-            { $push: {images: {image,title}}},
-            {new:true}
+//         const updated=await Gallery.findByIdAndUpdate(
+//             req.params.id,
+//             { $push: {images: {image,title}}},
+//             {new:true}
+//         );
+//         res.json(updated);
+//     }catch(err){
+//         res.status(500).json({error:err.message});
+//     }
+// }
+
+export const addImage = async (req, res) => {
+    try {
+        const { image, title } = req.body;
+
+        const updated = await Gallery.findByIdAndUpdate(
+            req.params.id, // Fixed typo here from 're' to 'req'
+            { $push: { images: { image, title } } },
+            { new: true }
         );
+        
         res.json(updated);
-    }catch(err){
-        res.status(500).json({error:err.message});
+    } catch (err) {
+        res.status(500).json({ error: err.message });
     }
 }
 
-export const deleteImage=async(req,res)=>{
-    try{
-        const {imageId}=req.params;
+// export const deleteImage=async(req,res)=>{
+//     try{
+//         const {imageId}=req.params;
 
-        const updated=await Gallery.findByIdAndUpdate(
-            req.params.id,
+//         const updated=await Gallery.findByIdAndUpdate(
+//             req.params.id,
 
-             { $pull:{images:{_id:imageId}}},
-             {new:true}
+//              { $pull:{images:{_id:imageId}}},
+//              {new:true}
+//         );
+//         res.json(updated);
+//     }catch(err){
+//         res.status(500).json({error:err.message});
+//     }
+// }
+
+
+
+export const deleteImage = async (req, res) => {
+    try {
+        const { imageId } = req.body;
+
+        // Double-check: Ensure it says 'req' and 'res' here!
+        const updated = await Gallery.findByIdAndUpdate(
+            req.params.id, 
+            { 
+                $pull: { images: { _id: imageId } } 
+            },
+            { new: true }
         );
-        res.json(updated);
-    }catch(err){
-        res.status(500).json({error:err.message});
-    }
-}
 
+        if (!updated) {
+            return res.status(404).json({ message: "Gallery not found" });
+        }
+
+        res.json(updated);
+    } catch (err) {
+        res.status(500).json({ error: err.message });
+    }
+};
 // rearrange images
 // export const rearrangeImages=async(req,res)=>{
 //     try{

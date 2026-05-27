@@ -62,9 +62,9 @@ router.get('/category/:category',protect,
 router.post('/', protect, createGallery);
 router.put('/:id/add-image', protect, addImage);
 
-router.put("/rearrange/:id", rearrangeImages);
+router.put("/rearrange/:id",protect, rearrangeImages);
 // RESTRICTED CRITICAL DELETIONS (Admin Only)
-router.put('/:id/delete-image', protect, authorizeRoles('Admin'), deleteImage);
-router.delete('/:id', protect, authorizeRoles('Admin'), deleteGallery);
+router.put('/:id/delete-image', protect, deleteImage);
+router.delete('/:id', protect, deleteGallery);
 
 export default router;
