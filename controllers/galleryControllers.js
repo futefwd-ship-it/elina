@@ -42,7 +42,7 @@ export const addImage=async(req,res)=>{
         const {image,title}=req.body;
 
         const updated=await Gallery.findByIdAndUpdate(
-            re.params.id,
+            req.params.id,
             { $push: {images: {image,title}}},
             {new:true}
         );
