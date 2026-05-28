@@ -51,6 +51,6 @@ const floorSchema = new mongoose.Schema({
 
 
 
+const Floor = mongoose.model("Floor", floorSchema);
 
-const User = mongoose.model('Floor', floorSchema);
-export default User;
+export default Floor;
