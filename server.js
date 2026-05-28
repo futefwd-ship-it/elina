@@ -13,7 +13,7 @@ app.use(cors());
 import authRoutes from './routes/authRoutes.js';
 import galleryRoutes from './routes/galleryRoutes.js';
 
-import ProjectDetails from './models/ProjectDetails.js';
+import ProjectDetails from './routes/projectdetailsRoutes.js';
 
 
 app.get("/",(req,res)=>{
